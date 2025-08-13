@@ -7,4 +7,16 @@ const donationSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }
 });
 
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  password: String,
+  role: {
+    type: String,
+    enum: ['committee'],
+    required: true
+  },})
+
+
 module.exports = mongoose.model('Donation', donationSchema);
+module.exports = mongoose.model('committee', userSchema);
