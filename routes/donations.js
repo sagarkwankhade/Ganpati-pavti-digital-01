@@ -53,5 +53,16 @@ router.post('/confirm-payment', async (req, res) => {
   }
 });
 
+// Get total amount of all donations
+router.get('/total', async (_, res) => {
+  try {
+    const [{ total = 0 } = {}] = await Donation.aggregate([
+      { $group: { _id: null, total: { $sum: '$amount' } } }
+    ]);
+    res.json({ total });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;

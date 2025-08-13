@@ -12,7 +12,9 @@ app.use(express.json());
 
 // Register your donations router
 const donationRoutes = require('./routes/donations');
+const authRoutes = require('./routes/auth'); // Import auth routes
 app.use('/donations', donationRoutes);
+app.use('/auth', authRoutes); // Mount auth routes
 
 // Connect to MongoDB and start the server
 mongoose.connect(process.env.MONGODB_URI)
